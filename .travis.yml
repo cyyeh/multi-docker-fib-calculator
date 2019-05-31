@@ -13,4 +13,10 @@ after_success:
   - docker build -t cyyeh/multi-docker-nginx ./nginx
   - docker build -t cyyeh/multi-docker-server ./server
   - docker build -t cyyeh/multi-docker-worker ./worker
-
+  # log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # take those images and push them to docker hub
+  - docker push cyyeh/multi-docker-client
+  - docker push cyyeh/multi-docker-nginx
+  - docker push cyyeh/multi-docker-server
+  - docker push cyyeh/multi-docker-worker
