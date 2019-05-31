@@ -3,20 +3,20 @@ services:
   - docker
 
 before_install:
-  - docker build -t cyyeh/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t chihyu/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true cyyeh/react-test npm test -- --coverage
+  - docker run -e CI=true chihyu/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t cyyeh/multi-docker-client ./client
-  - docker build -t cyyeh/multi-docker-nginx ./nginx
-  - docker build -t cyyeh/multi-docker-server ./server
-  - docker build -t cyyeh/multi-docker-worker ./worker
+  - docker build -t chihyu/multi-docker-client ./client
+  - docker build -t chihyu/multi-docker-nginx ./nginx
+  - docker build -t chihyu/multi-docker-server ./server
+  - docker build -t chihyu/multi-docker-worker ./worker
   # log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # take those images and push them to docker hub
-  - docker push cyyeh/multi-docker-client
-  - docker push cyyeh/multi-docker-nginx
-  - docker push cyyeh/multi-docker-server
-  - docker push cyyeh/multi-docker-worker
+  - docker push chihyu/multi-docker-client
+  - docker push chihyu/multi-docker-nginx
+  - docker push chihyu/multi-docker-server
+  - docker push chihyu/multi-docker-worker
